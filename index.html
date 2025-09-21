@@ -11,11 +11,21 @@
       width: 100%;
     }
 
-    body { font-family: 'Segoe UI', sans-serif; text-align: center; background: radial-gradient(circle at top, #fff7e6, #f0d9b5); height: 100vh; margin: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      text-align: center; 
+      background: radial-gradient(circle at top, #fff7e6, #f0d9b5); 
+      height: 100vh; 
+      margin: 0; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+    }
 
     h1 {
-      font-size: 3.2em;
-      margin: 20px 0;
+      font-size: 3.6em;
+      margin: 100px 0 20px 0;
       letter-spacing: 2px;
       font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
       color: #fff8dc;
@@ -23,10 +33,10 @@
     }
 
     .tube {
-      width: 200px;
-      height: 340px;
+      width: 220px;
+      height: 360px;
       background: linear-gradient(135deg, #d2691e, #8b4513);
-      border-radius: 100px;
+      border-radius: 120px;
       box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
                   inset 4px 6px 10px rgba(255,255,255,0.3),
                   0 6px 20px rgba(0,0,0,0.4);
@@ -60,18 +70,19 @@
       90%  { transform: rotate(2deg); }
       100% { transform: rotate(0deg); }
     }
+
     .slip {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 400px;
+      width: 430px;
       min-height: 40px;
       padding: 16px 10px;
       background: linear-gradient(135deg, #fffbe6 80%, #ffe066 100%);
       border: 2.5px solid #d4af37;
       border-radius: 10px;
       font-family: 'SVN-Calligraphy', 'Dancing Script','Times New Roman', serif;
-      font-size: 28px;
+      font-size: 30px;
       color: #8b4513;
       box-shadow: 0 4px 24px rgba(255,215,0,0.18), 0 0 12px #ffd700 inset;
       text-shadow: 0 1px 0 #fff8dc;
@@ -90,36 +101,51 @@
   </style>
 </head>
 <body>
+  
   <h1>🌸 Gieo Quẻ 🌸</h1>
   <div class="tube" id="tube">Hộp Quẻ</div>
 
-   <script>
-
+  <script>
     const slips = [
-      "Bạn đi thêm 1 ô nhé",
-      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào",
-      "Đèn xanh, đi nhanh thêm 3 ô",
-      "Ối dồi ôi đi hẳn thêm 4 ô",
-      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô",
-      "Oops! Trừ 2 ô",
-      "Bạn bị lùi 3 ô, bao giờ đến đích đây!",
-      "Ừm...trừ 4 ô!",
-      "Kiwi Kiwi, secret này là cho bạn",
-      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"
+      "Bạn đi thêm 1 ô nhé",        // tiến
+      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // tiến
+      "Đèn xanh, đi nhanh thêm 3 ô", // tiến
+      "Ối dồi ôi đi hẳn thêm 4 ô",   // tiến
+      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // lùi
+      "Oops! Trừ 2 ô",               // lùi
+      "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // lùi
+      "Ừm...trừ 4 ô!",               // lùi
+      "Kiwi Kiwi, secret này là cho bạn", // tiến
+      "Ô thì có mũ, ơ kìa được đi thêm 0 ô", // giữ nguyên
+      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"      // tiến
     ];
-
 
     const sounds = [
       'tatsumaki-senpuu-251795.mp3',
       'sarcastic-clapping-sound-186117.mp3',
-      'wowowowowowowow-103214.mp3',
+      'yeah-boy-114748.mp3',
       'wowowowowowowow-103214.mp3',
       'aa-with-reverb-meme-381632.mp3',
       'dumb-ways-to-day-149817.mp3',
-      'mua.mp3',
+      'On_khong.mp3',
       'hi.mp3',
       'wowowowowowowow-103214.mp3',
-      'yeah-boy-114748.mp3'
+      'oi.mp3',
+      'tieng_ho.mp3'
+    ];
+
+    // Weighted array theo tỉ lệ 70% tiến, 20% giữ nguyên, 10% lùi
+    const weightedIndexes = [
+ // Tiến nhỏ 30%
+  0,0,0, 1,1,1, 2,2, 8,8,  
+  // Tiến 4 ô 25%
+  3,3,3,3,  
+  // Tiến lớn 5 ô 10%
+  10,  
+  // Giữ nguyên 20%
+  9,9,  
+  // Lùi 10%
+  4,5,6,7
     ];
 
     const tube = document.getElementById("tube");
@@ -127,24 +153,21 @@
     let currentAudio = null;
 
     tube.addEventListener("click", () => {
-   
       tube.classList.add("shake");
       setTimeout(() => tube.classList.remove("shake"), 1000);
 
-  
       if (currentSlip) {
         currentSlip.remove();
         currentSlip = null;
       }
 
-    
       if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
       }
 
-      
-      const index = Math.floor(Math.random() * slips.length);
+      // Chọn ngẫu nhiên theo trọng số
+      const index = weightedIndexes[Math.floor(Math.random() * weightedIndexes.length)];
 
       const slip = document.createElement("div");
       slip.className = "slip";
@@ -158,4 +181,3 @@
   </script>
 </body>
 </html>
-
