@@ -28,12 +28,13 @@
 
     /* Ống quẻ */
     .tube {
-      width: 240px;
+      width: 360px;
       height: 360px;
       margin: 20px auto;
       background: linear-gradient(135deg, #d2691e, #8b4513);
-      background-image: url('https://i.imgur.com/4AiXzf8.png');
-      border-radius: 120px;
+      background-image: url('/rinnegan.webp');
+      background-size: cover;
+      border-radius: 100%;
       box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
                   inset 4px 6px 10px rgba(255,255,255,0.3),
                   0 6px 20px rgba(0,0,0,0.4);
@@ -46,20 +47,17 @@
       transition: transform 0.3s ease;
     }
 
-    /* Thẻ quẻ bên trong */
-    .tube .stick {
-     
+    /* Hiệu ứng xoay */
+    .rotate {
+      animation: rotateTube 1.2s linear; 
     }
 
-    /* Hiệu ứng xoay 3 vòng */
-.rotate {
-  animation: rotateTube 1.2s linear; 
-}
+    @keyframes rotateTube {
+      from { transform: rotate(0deg) scale(1); }
+      to   { transform: rotate(3600deg) scale(1); } /* 10 vòng */
+    }
 
-@keyframes rotateTube {
-  from { transform: rotate(0deg) scale(1); }
-  to   { transform: rotate(3600deg) scale(1); } /* 5 vòng */
-}
+    /* Thẻ quẻ */
     .slip {
       position: absolute;
       top: 50%;
@@ -87,55 +85,62 @@
       30% { opacity: 1; }
       100% { transform: translate(-50%, -300px) rotate(-6deg); opacity: 1; }
     }
-    .shake-slip {
-      animation: shakeSlip 0.25s infinite;
-    }
-    @keyframes shakeSlip {
-      0%   { transform: translate(-50%, -300px) rotate(-6deg); }
-      25%  { transform: translate(-52%, -300px) rotate(-8deg); }
-      50%  { transform: translate(-48%, -300px) rotate(-4deg); }
-      75%  { transform: translate(-51%, -300px) rotate(-7deg); }
-      100% { transform: translate(-50%, -300px) rotate(-6deg); }
-    }
   </style>
 </head>
 <body>
   <h1>🌸 Gieo Quẻ 🌸</h1>
-  <div class="tube" id="tube">
-  </div>
- <script>
-  const slips = [
-  "“Bạn đi thêm 1 ô nhé”",
-  "“Chúc mừng bạn, đi thêm 2 ô ngay thôi nào”",
-  "“Đèn xanh, đi nhanh thêm 3 ô”",
-  "“Ối dồi ôi đi hẳn thêm 4 ô”",
-  "“Đỏ là red, đen là bạn, bạn bị lùi 1 ô”",
-  "“Oops! Trừ 2 ô”",
-  "“Bạn bị lùi 3 ô, bao giờ đến đích đây!”",
-  "“Ừm...trừ 4 ô!”",
-  "“Kiwi Kiwi, secret này là cho bạn”",
-  "“Phượt thủ à! Bạn đi hẳn thêm 5 ô”"
-];
+  <div class="tube" id="tube"></div>
 
-const tube = document.getElementById("tube");
-let currentSlip = null;
+  <!-- Âm thanh -->
+  <audio id="shakeSound" src="/woooooaah-199849.mp3"></audio>
+  <audio id="slipSound" src="/fart-5-228245.mp3"></audio>
 
-tube.addEventListener("click", () => {
-  tube.classList.add("rotate");
-  setTimeout(() => {
-    tube.classList.remove("rotate");
-    if (currentSlip) {
-      currentSlip.remove();
-      currentSlip = null;
-    }
-    const randomIndex = Math.floor(Math.random() * slips.length);
-    const slip = document.createElement("div");
-    slip.className = "slip";
-    slip.textContent = slips[randomIndex];
-    document.body.appendChild(slip);
-    currentSlip = slip;
-  }, 800); 
-});
-</script>
+  <script>
+    const slips = [
+      "“Bạn đi thêm 1 ô nhé”",
+      "“Chúc mừng bạn, đi thêm 2 ô ngay thôi nào”",
+      "“Đèn xanh, đi nhanh thêm 3 ô”",
+      "“Ối dồi ôi đi hẳn thêm 4 ô”",
+      "“Đỏ là red, đen là bạn, bạn bị lùi 1 ô”",
+      "“Oops! Trừ 2 ô”",
+      "“Bạn bị lùi 3 ô, bao giờ đến đích đây!”",
+      "“Ừm...trừ 4 ô!”",
+      "“Kiwi Kiwi, secret này là cho bạn”",
+      "“Phượt thủ à! Bạn đi hẳn thêm 5 ô”"
+    ];
+
+    const tube = document.getElementById("tube");
+    const shakeSound = document.getElementById("shakeSound");
+    const slipSound = document.getElementById("slipSound");
+    let currentSlip = null;
+
+    tube.addEventListener("click", () => {
+      // phát âm thanh rung
+      shakeSound.currentTime = 0;
+      shakeSound.play();
+
+      tube.classList.add("rotate");
+      setTimeout(() => {
+        tube.classList.remove("rotate");
+
+        if (currentSlip) {
+          currentSlip.remove();
+          currentSlip = null;
+        }
+
+        const randomIndex = Math.floor(Math.random() * slips.length);
+        const slip = document.createElement("div");
+        slip.className = "slip";
+        slip.textContent = slips[randomIndex];
+        document.body.appendChild(slip);
+        currentSlip = slip;
+
+        // âm thanh quẻ bay ra
+        slipSound.currentTime = 0;
+        slipSound.play();
+
+      }, 800); 
+    });
+  </script>
 </body>
 </html>
