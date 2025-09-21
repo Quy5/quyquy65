@@ -4,60 +4,62 @@
   <meta charset="UTF-8">
   <title>Trò chơi Gieo Quẻ</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      background: radial-gradient(circle at top, #fff7e6, #f0d9b5);
-      height: 100vh;
+    html, body {
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
+      height: 100%;
+      width: 100%;
     }
+
+    body { font-family: 'Segoe UI', sans-serif; text-align: center; background: radial-gradient(circle at top, #fff7e6, #f0d9b5); height: 100vh; margin: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 
     h1 {
       font-size: 3.2em;
-      margin-top: 150px;
-      margin-bottom: 10px;
+      margin: 20px 0;
       letter-spacing: 2px;
       font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
-      color: #b87333;
-      text-shadow: 0 2px 8px #ffe066;
+      color: #fff8dc;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
     }
 
-    /* Ống quẻ */
     .tube {
-      width: 360px;
-      height: 360px;
-      margin: 20px auto;
+      width: 200px;
+      height: 340px;
       background: linear-gradient(135deg, #d2691e, #8b4513);
-      background-image: url('rinnegan.webp');
-      background-size: cover;
-      border-radius: 100%;
+      border-radius: 100px;
       box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
                   inset 4px 6px 10px rgba(255,255,255,0.3),
                   0 6px 20px rgba(0,0,0,0.4);
-      position: relative;
       display: flex;
       justify-content: center;
-      align-items: flex-end;
-      overflow: hidden;
+      align-items: center;
+      color: #fff8dc;
+      font-size: 32px;
+      font-weight: bold;
+      font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
       cursor: pointer;
       transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .shake {
+      animation: shakeTube 1s ease-in-out;
     }
 
-    /* Hiệu ứng xoay */
-    .rotate {
-      animation: rotateTube 1.2s linear; 
+    @keyframes shakeTube {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(12deg); }
+      20%  { transform: rotate(-12deg); }
+      30%  { transform: rotate(10deg); }
+      40%  { transform: rotate(-10deg); }
+      50%  { transform: rotate(8deg); }
+      60%  { transform: rotate(-8deg); }
+      70%  { transform: rotate(5deg); }
+      80%  { transform: rotate(-5deg); }
+      90%  { transform: rotate(2deg); }
+      100% { transform: rotate(0deg); }
     }
-
-    @keyframes rotateTube {
-      from { transform: rotate(0deg) scale(1); }
-      to   { transform: rotate(3600deg) scale(1); } /* 10 vòng */
-    }
-
-    /* Thẻ quẻ */
     .slip {
       position: absolute;
       top: 50%;
@@ -68,7 +70,7 @@
       background: linear-gradient(135deg, #fffbe6 80%, #ffe066 100%);
       border: 2.5px solid #d4af37;
       border-radius: 10px;
-      font-family: 'SVN-Calligraphy', 'Dancing Script', 'Times New Roman', serif;
+      font-family: 'SVN-Calligraphy', 'Dancing Script','Times New Roman', serif;
       font-size: 28px;
       color: #8b4513;
       box-shadow: 0 4px 24px rgba(255,215,0,0.18), 0 0 12px #ffd700 inset;
@@ -89,59 +91,70 @@
 </head>
 <body>
   <h1>🌸 Gieo Quẻ 🌸</h1>
-  <div class="tube" id="tube"></div>
+  <div class="tube" id="tube">Hộp Quẻ</div>
 
-  <!-- Âm thanh -->
-  <audio id="shakeSound" src="woooooaah-199849.mp3"></audio>
-  <audio id="slipSound" src="fart-5-228245.mp3"></audio>
+   <script>
 
-  <script>
     const slips = [
-      "“Bạn đi thêm 1 ô nhé”",
-      "“Chúc mừng bạn, đi thêm 2 ô ngay thôi nào”",
-      "“Đèn xanh, đi nhanh thêm 3 ô”",
-      "“Ối dồi ôi đi hẳn thêm 4 ô”",
-      "“Đỏ là red, đen là bạn, bạn bị lùi 1 ô”",
-      "“Oops! Trừ 2 ô”",
-      "“Bạn bị lùi 3 ô, bao giờ đến đích đây!”",
-      "“Ừm...trừ 4 ô!”",
-      "“Kiwi Kiwi, secret này là cho bạn”",
-      "“Phượt thủ à! Bạn đi hẳn thêm 5 ô”"
+      "Bạn đi thêm 1 ô nhé",
+      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào",
+      "Đèn xanh, đi nhanh thêm 3 ô",
+      "Ối dồi ôi đi hẳn thêm 4 ô",
+      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô",
+      "Oops! Trừ 2 ô",
+      "Bạn bị lùi 3 ô, bao giờ đến đích đây!",
+      "Ừm...trừ 4 ô!",
+      "Kiwi Kiwi, secret này là cho bạn",
+      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"
+    ];
+
+
+    const sounds = [
+      '/tatsumaki-senpuu-251795.mp3',
+      '/sarcastic-clapping-sound-186117.mp3',
+      '/wowowowowowowow-103214.mp3',
+      '/wowowowowowowow-103214.mp3',
+      '/aa-with-reverb-meme-381632.mp3',
+      '/dumb-ways-to-day-149817.mp3',
+      '/mua.mp3',
+      '/hi.mp3',
+      '/wowowowowowowow-103214.mp3',
+      '/yeah-boy-114748.mp3'
     ];
 
     const tube = document.getElementById("tube");
-    const shakeSound = document.getElementById("shakeSound");
-    const slipSound = document.getElementById("slipSound");
     let currentSlip = null;
+    let currentAudio = null;
 
     tube.addEventListener("click", () => {
-      // phát âm thanh rung
-      shakeSound.currentTime = 0;
-      shakeSound.play();
+   
+      tube.classList.add("shake");
+      setTimeout(() => tube.classList.remove("shake"), 1000);
 
-      tube.classList.add("rotate");
-      setTimeout(() => {
-        tube.classList.remove("rotate");
+  
+      if (currentSlip) {
+        currentSlip.remove();
+        currentSlip = null;
+      }
 
-        if (currentSlip) {
-          currentSlip.remove();
-          currentSlip = null;
-        }
+    
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
 
-        const randomIndex = Math.floor(Math.random() * slips.length);
-        const slip = document.createElement("div");
-        slip.className = "slip";
-        slip.textContent = slips[randomIndex];
-        document.body.appendChild(slip);
-        currentSlip = slip;
+      
+      const index = Math.floor(Math.random() * slips.length);
 
-        // âm thanh quẻ bay ra
-        slipSound.currentTime = 0;
-        slipSound.play();
+      const slip = document.createElement("div");
+      slip.className = "slip";
+      slip.textContent = slips[index];
+      document.body.appendChild(slip);
+      currentSlip = slip;
 
-      }, 800); 
+      currentAudio = new Audio(sounds[index]);
+      currentAudio.play();
     });
   </script>
 </body>
 </html>
-
