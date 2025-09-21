@@ -1,146 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy birthday</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Trò chơi Gieo Quẻ</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: radial-gradient(circle at top, #fff7e6, #f0d9b5);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3.2em;
+      margin-top: 150px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
+      color: #b87333;
+      text-shadow: 0 2px 8px #ffe066;
+    }
+
+    /* Ống quẻ */
+    .tube {
+      width: 240px;
+      height: 360px;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #d2691e, #8b4513);
+      background-image: url('https://i.imgur.com/4AiXzf8.png');
+      border-radius: 120px;
+      box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
+                  inset 4px 6px 10px rgba(255,255,255,0.3),
+                  0 6px 20px rgba(0,0,0,0.4);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Thẻ quẻ bên trong */
+    .tube .stick {
+     
+    }
+
+    /* Hiệu ứng xoay 3 vòng */
+.rotate {
+  animation: rotateTube 1.2s linear; 
+}
+
+@keyframes rotateTube {
+  from { transform: rotate(0deg) scale(1); }
+  to   { transform: rotate(3600deg) scale(1); } /* 5 vòng */
+}
+    .slip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      min-height: 40px;
+      padding: 16px 10px;
+      background: linear-gradient(135deg, #fffbe6 80%, #ffe066 100%);
+      border: 2.5px solid #d4af37;
+      border-radius: 10px;
+      font-family: 'SVN-Calligraphy', 'Dancing Script', 'Times New Roman', serif;
+      font-size: 28px;
+      color: #8b4513;
+      box-shadow: 0 4px 24px rgba(255,215,0,0.18), 0 0 12px #ffd700 inset;
+      text-shadow: 0 1px 0 #fff8dc;
+      transform: translate(-50%, -50%) translateY(0);
+      opacity: 0;
+      animation: flyOut 1s ease forwards;
+      z-index: 10;
+      filter: drop-shadow(0 0 8px #ffd700);
+    }
+
+    @keyframes flyOut {
+      0% { transform: translate(-50%, -50%) translateY(0); opacity: 0; }
+      30% { opacity: 1; }
+      100% { transform: translate(-50%, -300px) rotate(-6deg); opacity: 1; }
+    }
+    .shake-slip {
+      animation: shakeSlip 0.25s infinite;
+    }
+    @keyframes shakeSlip {
+      0%   { transform: translate(-50%, -300px) rotate(-6deg); }
+      25%  { transform: translate(-52%, -300px) rotate(-8deg); }
+      50%  { transform: translate(-48%, -300px) rotate(-4deg); }
+      75%  { transform: translate(-51%, -300px) rotate(-7deg); }
+      100% { transform: translate(-50%, -300px) rotate(-6deg); }
+    }
+  </style>
 </head>
 <body>
-    <div id="wrapper">
-        <div class="flag__birthday">
-            <img src="./images/1.png" alt="" width="350" class="flag__left">
-            <img src="./images/1.png" alt="" width="350" class="flag__right">
-        </div>
-        <div class="content">
-            <div class="left">
-                <div class="title">
-                    <h1 class="happy">
-                        <span style="--t: 4s;">H</span>
-                        <span style="--t: 4.2s;">a</span>
-                        <span style="--t: 4.4s;">p</span>
-                        <span style="--t: 4.6s;">p</span>
-                        <span style="--t: 4.8s;">
-                            y
-                            <div class="hat">
-                                <img src="./images/hat.png" alt="" width="130">
-                            </div>
-                        </span>
-                    </h1>
-                    <h1 class="birthday">
-                        <span style="--t: 5s;">B</span>
-                        <span style="--t: 5.2s;">i</span>
-                        <span style="--t: 5.4s;">r</span>
-                        <span style="--t: 5.6s;">t</span>
-                        <span style="--t: 5.8s;">h</span>
-                        <span style="--t: 6s;">d</span>
-                        <span style="--t: 6.2s;">a</span>
-                        <span style="--t: 6.4s;">y</span>
-                    </h1>
-                    
-                </div>
-                <div class="date__of__birth">
-                    <span></span>
-                </div>
-                <div class="btn">
-                    <button id="btn__letter">
-                        Ấn vào đây
-                        <i class="fa-regular fa-envelope"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="right">
-                <div class="box__account">
-                    <div class="image">
-                        <img src="/images/z6545637180609_fd201d5c133940814d4f942f479ab215.jpg" alt="">
-                    </div>
-                    <div class="name">
-                        <i class="fa-solid fa-heart"></i>
-                        <span>Thanh Hiền</span>
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <div class="balloon_one">
-                        <img width="100px" src="./images/balloon1.png" alt="">
-                    </div>
-                    <div class="balloon_two">
-                        <img width="100px" src="./images/balloon2.png" alt="">
-                    </div>
-                </div>
-                <div class="cricle">
-                    <div class="text__cricle">
-                        <span style="--i: 1;">h</span>
-                        <span style="--i: 2;">a</span>
-                        <span style="--i: 3;">p</span>
-                        <span style="--i: 4;">p</span>
-                        <span style="--i: 5;">y</span>
-                        <span style="--i: 6;">-</span>
-                        <span style="--i: 7;">b</span>
-                        <span style="--i: 8;">i</span>
-                        <span style="--i: 9;">r</span>
-                        <span style="--i: 10;">t</span>
-                        <span style="--i: 11;">h</span>
-                        <span style="--i: 12;">d</span>
-                        <span style="--i: 13;">a</span>
-                        <span style="--i: 14;">y</span>
-                        <span style="--i: 15;">-</span>
-                    </div>
-                    
-                </div>
-                <span class="day">
-                    
-                </span>
-                <span class="month"></span>
-            </div>
-        </div>
-        <div class="decorate_star star1" style="--t: 15s;"></div>
-        <div class="decorate_star star2" style="--t: 15.2s;"></div>
-        <div class="decorate_star star3" style="--t: 15.4s;"></div>
-        <div class="decorate_star star4" style="--t: 15.6s;"></div>
-        <div class="decorate_star star5" style="--t: 15.8s;"></div>
-        <div class="decorate_flower--one" style="--t: 15s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_flower--two" style="--t: 15.3s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_flower--three" style="--t: 15.6s;">
-            <img width="20" src="./images/decorate_flower.png" alt="">
-        </div>
-        <div class="decorate_bottom">
-            <img src="./images/decorate.png" alt="" width="100">
-        </div>
-        <div class="smiley__icon">
-            <img src="./images/smiley_icon.png" alt="" width="100">
-        </div>
- 
+  <h1>🌸 Gieo Quẻ 🌸</h1>
+  <div class="tube" id="tube">
+  </div>
+ <script>
+  const slips = [
+  "“Bạn đi thêm 1 ô nhé”",
+  "“Chúc mừng bạn, đi thêm 2 ô ngay thôi nào”",
+  "“Đèn xanh, đi nhanh thêm 3 ô”",
+  "“Ối dồi ôi đi hẳn thêm 4 ô”",
+  "“Đỏ là red, đen là bạn, bạn bị lùi 1 ô”",
+  "“Oops! Trừ 2 ô”",
+  "“Bạn bị lùi 3 ô, bao giờ đến đích đây!”",
+  "“Ừm...trừ 4 ô!”",
+  "“Kiwi Kiwi, secret này là cho bạn”",
+  "“Phượt thủ à! Bạn đi hẳn thêm 5 ô”"
+];
 
-        <div class="box__letter">
-            <div class="letter__border">
-                <div class="letter">
-                    <div class="title__letter">
-                    </div>
-                    <div class="content__letter">
-                        <div class="left">
-                            <div class="left_video"><video id="heart__letter" src="/images/thanhhien.mp4" autoplay loop playsinline controls></video></div>
-                        </div>
-                        <div class="right">
-                            <div class="love__img">
-                                <img src="./images/love.png" alt="" width="220">
-                            </div>
-                            <div class="text__letter">
-                                 <p></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="close">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+const tube = document.getElementById("tube");
+let currentSlip = null;
+
+tube.addEventListener("click", () => {
+  tube.classList.add("rotate");
+  setTimeout(() => {
+    tube.classList.remove("rotate");
+    if (currentSlip) {
+      currentSlip.remove();
+      currentSlip = null;
+    }
+    const randomIndex = Math.floor(Math.random() * slips.length);
+    const slip = document.createElement("div");
+    slip.className = "slip";
+    slip.textContent = slips[randomIndex];
+    document.body.appendChild(slip);
+    currentSlip = slip;
+  }, 800); 
+});
+</script>
 </body>
- <script src="script.js"></script>
 </html>
