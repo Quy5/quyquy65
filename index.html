@@ -45,7 +45,7 @@
                   0 6px 20px rgba(0,0,0,0.4); */
       display: flex;
       justify-content: center;
-      background-image:url('p_unnamed.png');
+      background-image:url('/p_unnamed.png');
       background-size: contain;
       background-repeat: no-repeat;
       align-items: center;
@@ -119,51 +119,66 @@
   </div>
   <script>
     const slips = [
-      "Bạn đi thêm 1 ô nhé",        // 0
-      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // 1
-      "Đèn xanh, đi nhanh thêm 3 ô", // 2
-      "Ối dồi ôi đi hẳn thêm 4 ô",   // 3
-      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // 4
-      "Oops! Trừ 2 ô",               // 5
-      "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // 6
-      "Ừm...trừ 4 ô!",               // 7
-      "Kiwi Kiwi, secret này là cho bạn", // 8
-      "Ô thì có mũ, ơ kìa được đi thêm 0 ô", // 9
-      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"      // 10
+    "Bạn đi thêm 1 ô nhé",                   // 0
+    "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // 1
+    "Và đây là ô xinh say Haiii",            // 2
+    "Đèn xanh, đi nhanh thêm 3 ô",           // 3
+    "Tada~ Số ô được đi là 3",               // 4
+    "Ối dồi ôi đi hẳn thêm 4 ô",             // 5
+    "Phượt thủ à! Bạn đi hẳn thêm 5 ô",      // 6
+    "Hi give 5",                             // 7
+    "Bạn xinh lên còn ô lên 6",              // 8
+    "Ô thì có mũ, ơ kìa được đi thêm 0 ô",  // 9
+    "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // 10
+    "Oops, lùi 1 ô rùi",                     // 11
+    "Oops! Trừ 2 ô",                         // 12
+    "SOS tắc đường, lùi xuống 2 ô",          // 13
+    "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // 14
+    "Hehe mình xin lại 3 ô nhé",             // 15
+    "Ừm...trừ 4 ô!",                         // 16
+    "Kiwi Kiwi, secret này là cho bạn"
     ];
     const sounds = [
-      'tatsumaki-senpuu-251795.mp3', // 0
-      'sarcastic-clapping-sound-186117.mp3', // 1
-      'yeah-boy-114748.mp3', // 2
-      'wowowowowowowow-103214.mp3', // 3
-      'aa-with-reverb-meme-381632.mp3', // 4
-      'dumb-ways-to-day-149817.mp3', // 5
-      'doaphudu.mp3', // 6
-      'hi.mp3', // 7
-      'wowowowowowowow-103214.mp3', // 8
-      'oi.mp3', // 9
-      'tieng_ho.mp3' // 10
+      '1.mp3', // 0
+      '2.mp3',  // 1
+      '3.mp3',  // 2
+      '4.mp3',  // 3
+      '5.mp3',  // 4
+      '7.mp3',  // 5
+      '6.mp3',  // 6
+      '2.mp3',  // 7
+      '7.mp3',  // 8
+      '3.mp3',  // 9
+      '11.mp3', // 10
+      '12.mp3', // 11
+      '13.mp3', // 12
+      '14.mp3', // 13
+      '15.mp3', // 14
+      '15.mp3', // 15
+      '16.mp3', // 16
+      '17.mp3', // 17
+
     ];
     const weightedIndexes = [];
-    // 40% đi 1 ô
-    for (let i = 0; i < 41; i++) weightedIndexes.push(0);
-    // 20% đi 2 ô
-    for (let i = 0; i < 20; i++) weightedIndexes.push(1);
-    // 10% đi 3 ô
-    for (let i = 0; i < 10; i++) weightedIndexes.push(2);
-    // 5% đi 4 ô
-    for (let i = 0; i < 5; i++) weightedIndexes.push(3);
-    // 5% đi 5 ô
-    for (let i = 0; i < 5; i++) weightedIndexes.push(10);
-    // 5% không đi ô nào
+    for (let i = 0; i < 5; i++) weightedIndexes.push(0);
+    for (let i = 0; i < 7; i++) weightedIndexes.push(1);
+    for (let i = 0; i < 7; i++) weightedIndexes.push(2);
+    for (let i = 0; i < 7; i++) weightedIndexes.push(3);
+    for (let i = 0; i < 8; i++) weightedIndexes.push(4);
+    for (let i = 0; i < 11; i++) weightedIndexes.push(5);
+    for (let i = 0; i < 10; i++) weightedIndexes.push(6);
+    for (let i = 0; i < 10; i++) weightedIndexes.push(7);
+    for (let i = 0; i < 10; i++) weightedIndexes.push(8);
     for (let i = 0; i < 5; i++) weightedIndexes.push(9);
-    // 2% Kiwi
-    for (let i = 0; i < 1; i++) weightedIndexes.push(8);
-    // 13% lùi (4,5,6,7 chia đều)
-    const loseOptions = [4,5,6,7];
-    for (let i = 0; i < 13; i++) {
-      weightedIndexes.push(loseOptions[i % loseOptions.length]);
-    }
+    for (let i = 0; i < 2; i++) weightedIndexes.push(10);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(11);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(12);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(13);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(14);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(15);
+    for (let i = 0; i < 2; i++) weightedIndexes.push(16);
+    for (let i = 0; i < 6; i++) weightedIndexes.push(17);
+
     const tube = document.getElementById("tube");
     let currentSlip = null;
     let currentAudio = null;
@@ -191,4 +206,3 @@
   </script>
 </body>
 </html>
-
