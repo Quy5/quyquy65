@@ -11,21 +11,24 @@
       width: 100%;
     }
 
-    body { 
+    .container { 
       font-family: 'Segoe UI', sans-serif; 
       text-align: center; 
       background: radial-gradient(circle at top, #fff7e6, #f0d9b5); 
+      /* background-image: url('/background.jpg') ;
+      background-repeat: no-repeat;
+      background-size: cover; */
       height: 100vh; 
       margin: 0; 
       display: flex; 
       flex-direction: column; 
       justify-content: center; 
-      align-items: center; 
+      align-items: center;
     }
 
     h1 {
-      font-size: 3.6em;
-      margin: 100px 0 20px 0;
+      font-size: 4em;
+      margin: 20px 0 20px 0;
       letter-spacing: 2px;
       font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
       color: #fff8dc;
@@ -33,18 +36,21 @@
     }
 
     .tube {
-      width: 220px;
-      height: 360px;
-      background: linear-gradient(135deg, #d2691e, #8b4513);
-      border-radius: 120px;
-      box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
+      width: 600px;
+      height: 760px;
+      /* background: linear-gradient(135deg, #d2691e, #8b4513); */
+      /* border-radius: 120px; */
+      /* box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
                   inset 4px 6px 10px rgba(255,255,255,0.3),
-                  0 6px 20px rgba(0,0,0,0.4);
+                  0 6px 20px rgba(0,0,0,0.4); */
       display: flex;
       justify-content: center;
+      background-image:url('/p_unnamed.png');
+      background-size: contain;
+      background-repeat: no-repeat;
       align-items: center;
       color: #fff8dc;
-      font-size: 32px;
+
       font-weight: bold;
       font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
       text-shadow: 0 2px 6px rgba(0,0,0,0.5);
@@ -52,6 +58,11 @@
       transition: transform 0.3s ease;
       position: relative;
       overflow: hidden;
+    }
+    p{
+      font-size: 28px;
+      margin-top: 180px;
+      margin-right: 10px;
     }
     .shake {
       animation: shakeTube 1s ease-in-out;
@@ -73,9 +84,9 @@
 
     .slip {
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
-      width: 430px;
+      min-width: 200px;
       min-height: 40px;
       padding: 16px 10px;
       background: linear-gradient(135deg, #fffbe6 80%, #ffe066 100%);
@@ -87,6 +98,7 @@
       box-shadow: 0 4px 24px rgba(255,215,0,0.18), 0 0 12px #ffd700 inset;
       text-shadow: 0 1px 0 #fff8dc;
       transform: translate(-50%, -50%) translateY(0);
+      text-align: center;
       opacity: 0;
       animation: flyOut 1s ease forwards;
       z-index: 10;
@@ -101,74 +113,72 @@
   </style>
 </head>
 <body>
-  
+  <div class="container">
   <h1>🌸 Gieo Quẻ 🌸</h1>
-  <div class="tube" id="tube">Hộp Quẻ</div>
-
+  <div class="tube" id="tube"><p>Hộp Quẻ</p></div>
+  </div>
   <script>
     const slips = [
-      "Bạn đi thêm 1 ô nhé",        // tiến
-      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // tiến
-      "Đèn xanh, đi nhanh thêm 3 ô", // tiến
-      "Ối dồi ôi đi hẳn thêm 4 ô",   // tiến
-      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // lùi
-      "Oops! Trừ 2 ô",               // lùi
-      "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // lùi
-      "Ừm...trừ 4 ô!",               // lùi
-      "Kiwi Kiwi, secret này là cho bạn", // tiến
-      "Ô thì có mũ, ơ kìa được đi thêm 0 ô", // giữ nguyên
-      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"      // tiến
+      "Bạn đi thêm 1 ô nhé",        // 0
+      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // 1
+      "Đèn xanh, đi nhanh thêm 3 ô", // 2
+      "Ối dồi ôi đi hẳn thêm 4 ô",   // 3
+      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // 4
+      "Oops! Trừ 2 ô",               // 5
+      "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // 6
+      "Ừm...trừ 4 ô!",               // 7
+      "Kiwi Kiwi, secret này là cho bạn", // 8
+      "Ô thì có mũ, ơ kìa được đi thêm 0 ô", // 9
+      "Phượt thủ à! Bạn đi hẳn thêm 5 ô"      // 10
     ];
-
     const sounds = [
-      'tatsumaki-senpuu-251795.mp3',
-      'sarcastic-clapping-sound-186117.mp3',
-      'yeah-boy-114748.mp3',
-      'wowowowowowowow-103214.mp3',
-      'aa-with-reverb-meme-381632.mp3',
-      'dumb-ways-to-day-149817.mp3',
-      'On_khong.mp3',
-      'hi.mp3',
-      'wowowowowowowow-103214.mp3',
-      'oi.mp3',
-      'tieng_ho.mp3'
+      'tatsumaki-senpuu-251795.mp3', // 0
+      'sarcastic-clapping-sound-186117.mp3', // 1
+      'yeah-boy-114748.mp3', // 2
+      'wowowowowowowow-103214.mp3', // 3
+      'aa-with-reverb-meme-381632.mp3', // 4
+      'dumb-ways-to-day-149817.mp3', // 5
+      'doaphudu.mp3', // 6
+      'hi.mp3', // 7
+      'wowowowowowowow-103214.mp3', // 8
+      'oi.mp3', // 9
+      'tieng_ho.mp3' // 10
     ];
-
-    // Weighted array theo tỉ lệ 70% tiến, 20% giữ nguyên, 10% lùi
-    const weightedIndexes = [
- // Tiến nhỏ 30%
-  0,0,0, 1,1,1, 2,2, 8,8,  
-  // Tiến 4 ô 25%
-  3,3,3,3,  
-  // Tiến lớn 5 ô 10%
-  10,  
-  // Giữ nguyên 20%
-  9,9,  
-  // Lùi 10%
-  4,5,6,7
-    ];
-
+    const weightedIndexes = [];
+    // 40% đi 1 ô
+    for (let i = 0; i < 41; i++) weightedIndexes.push(0);
+    // 20% đi 2 ô
+    for (let i = 0; i < 20; i++) weightedIndexes.push(1);
+    // 10% đi 3 ô
+    for (let i = 0; i < 10; i++) weightedIndexes.push(2);
+    // 5% đi 4 ô
+    for (let i = 0; i < 5; i++) weightedIndexes.push(3);
+    // 5% đi 5 ô
+    for (let i = 0; i < 5; i++) weightedIndexes.push(10);
+    // 5% không đi ô nào
+    for (let i = 0; i < 5; i++) weightedIndexes.push(9);
+    // 2% Kiwi
+    for (let i = 0; i < 1; i++) weightedIndexes.push(8);
+    // 13% lùi (4,5,6,7 chia đều)
+    const loseOptions = [4,5,6,7];
+    for (let i = 0; i < 13; i++) {
+      weightedIndexes.push(loseOptions[i % loseOptions.length]);
+    }
     const tube = document.getElementById("tube");
     let currentSlip = null;
     let currentAudio = null;
-
     tube.addEventListener("click", () => {
       tube.classList.add("shake");
       setTimeout(() => tube.classList.remove("shake"), 1000);
-
       if (currentSlip) {
         currentSlip.remove();
         currentSlip = null;
       }
-
       if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
       }
-
-      // Chọn ngẫu nhiên theo trọng số
       const index = weightedIndexes[Math.floor(Math.random() * weightedIndexes.length)];
-
       const slip = document.createElement("div");
       slip.className = "slip";
       slip.textContent = slips[index];
