@@ -15,9 +15,6 @@
       font-family: 'Segoe UI', sans-serif; 
       text-align: center; 
       background: radial-gradient(circle at top, #fff7e6, #f0d9b5); 
-      /* background-image: url('/background.jpg') ;
-      background-repeat: no-repeat;
-      background-size: cover; */
       height: 100vh; 
       margin: 0; 
       display: flex; 
@@ -38,11 +35,6 @@
     .tube {
       width: 600px;
       height: 760px;
-      /* background: linear-gradient(135deg, #d2691e, #8b4513); */
-      /* border-radius: 120px; */
-      /* box-shadow: inset -4px -6px 10px rgba(0,0,0,0.3),
-                  inset 4px 6px 10px rgba(255,255,255,0.3),
-                  0 6px 20px rgba(0,0,0,0.4); */
       display: flex;
       justify-content: center;
       background-image:url('p_unnamed.png');
@@ -50,7 +42,6 @@
       background-repeat: no-repeat;
       align-items: center;
       color: #fff8dc;
-
       font-weight: bold;
       font-family: 'SVN-Calligraphy','Dancing Script','Segoe UI',serif;
       text-shadow: 0 2px 6px rgba(0,0,0,0.5);
@@ -59,11 +50,13 @@
       position: relative;
       overflow: hidden;
     }
+
     p{
       font-size: 28px;
       margin-top: 180px;
       margin-right: 10px;
     }
+
     .shake {
       animation: shakeTube 1s ease-in-out;
     }
@@ -114,77 +107,79 @@
 </head>
 <body>
   <div class="container">
-  <h1>🌸 Gieo Quẻ 🌸</h1>
-  <div class="tube" id="tube"><p>Hộp Quẻ</p></div>
+    <h1>🌸 Gieo Quẻ 🌸</h1>
+    <div class="tube" id="tube"><p>Hộp Quẻ</p></div>
   </div>
+
   <script>
     const slips = [
-    "Bạn đi thêm 1 ô nhé",                   // 0
-    "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // 1
-    "Và đây là ô xinh say Haiii",            // 2
-    "Đèn xanh, đi nhanh thêm 3 ô",           // 3
-    "Tada~ Số ô được đi là 3",               // 4
-    "Ối dồi ôi đi hẳn thêm 4 ô",             // 5
-    "Phượt thủ à! Bạn đi hẳn thêm 5 ô",      // 6
-    "Hi give 5",                             // 7
-    "Bạn xinh lên còn ô lên 6",              // 8
-    "Ô thì có mũ, ơ kìa được đi thêm 0 ô",  // 9
-    "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // 10
-    "Oops, lùi 1 ô rùi",                     // 11
-    "Oops! Trừ 2 ô",                         // 12
-    "SOS tắc đường, lùi xuống 2 ô",          // 13
-    "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // 14
-    "Hehe mình xin lại 3 ô nhé",             // 15
-    "Ừm...trừ 4 ô!",                         // 16
-    "Kiwi Kiwi, secret này là cho bạn"
+      "Bạn đi thêm 1 ô nhé",                   // 0
+      "Chúc mừng bạn, đi thêm 2 ô ngay thôi nào", // 1
+      "Và đây là ô xinh say Haiii",            // 2
+      "Đèn xanh, đi nhanh thêm 3 ô",           // 3
+      "Tada~ Số ô được đi là 3",               // 4
+      "Ối dồi ôi đi hẳn thêm 4 ô",             // 5
+      "Phượt thủ à! Bạn đi hẳn thêm 5 ô",      // 6
+      "Hi give 5",                             // 7
+      "Bạn xinh lên còn ô lên 6",              // 8
+      "Ô thì có mũ, ơ kìa được đi thêm 0 ô",  // 9
+      "Đỏ là red, đen là bạn, bạn bị lùi 1 ô", // 10
+      "Oops, lùi 1 ô rùi",                     // 11
+      "Oops! Trừ 2 ô",                         // 12
+      "SOS tắc đường, lùi xuống 2 ô",          // 13
+      "Bạn bị lùi 3 ô, bao giờ đến đích đây!", // 14
+      "Hehe mình xin lại 3 ô nhé",             // 15
+      "Ừm...trừ 4 ô!",                         // 16
+      "Kiwi Kiwi, secret này là cho bạn"       // 17
     ];
-    const sounds = [
-      '1.mp3', // 0
-      '2.mp3',  // 1
-      '3.mp3',  // 2
-      '4.mp3',  // 3
-      '5.mp3',  // 4
-      '7.mp3',  // 5
-      '6.mp3',  // 6
-      '2.mp3',  // 7
-      '7.mp3',  // 8
-      '3.mp3',  // 9
-      '11.mp3', // 10
-      '12.mp3', // 11
-      '13.mp3', // 12
-      '14.mp3', // 13
-      '15.mp3', // 14
-      '15.mp3', // 15
-      '16.mp3', // 16
-      '17.mp3', // 17
 
+    const sounds = [
+      '1.mp3','2.mp3','3.mp3','4.mp3','5.mp3',
+      '7.mp3','6.mp3','2.mp3','7.mp3','3.mp3',
+      '11.mp3','12.mp3','13.mp3','14.mp3',
+      '15.mp3','15.mp3','16.mp3','17.mp3'
     ];
-    const weightedIndexes = [];
-    for (let i = 0; i < 5; i++) weightedIndexes.push(0);
-    for (let i = 0; i < 7; i++) weightedIndexes.push(1);
-    for (let i = 0; i < 7; i++) weightedIndexes.push(2);
-    for (let i = 0; i < 7; i++) weightedIndexes.push(3);
-    for (let i = 0; i < 8; i++) weightedIndexes.push(4);
-    for (let i = 0; i < 11; i++) weightedIndexes.push(5);
-    for (let i = 0; i < 10; i++) weightedIndexes.push(6);
-    for (let i = 0; i < 10; i++) weightedIndexes.push(7);
-    for (let i = 0; i < 10; i++) weightedIndexes.push(8);
-    for (let i = 0; i < 5; i++) weightedIndexes.push(9);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(10);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(11);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(12);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(13);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(14);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(15);
-    for (let i = 0; i < 2; i++) weightedIndexes.push(16);
-    for (let i = 0; i < 6; i++) weightedIndexes.push(17);
+
+    // Xác suất mỗi quẻ (tổng = 1.0)
+    const probabilities = [
+      0.05, // 0
+      0.07, // 1
+      0.07, // 2
+      0.07, // 3
+      0.08, // 4
+      0.11, // 5
+      0.10, // 6
+      0.10, // 7
+      0.10, // 8
+      0.05, // 9
+      0.02, // 10
+      0.02, // 11
+      0.02, // 12
+      0.02, // 13
+      0.02, // 14
+      0.02, // 15
+      0.02, // 16
+      0.06  // 17
+    ];
+
+    function weightedRandom(probabilities) {
+      let r = Math.random();
+      let sum = 0;
+      for (let i = 0; i < probabilities.length; i++) {
+        sum += probabilities[i];
+        if (r < sum) return i;
+      }
+      return probabilities.length - 1;
+    }
 
     const tube = document.getElementById("tube");
     let currentSlip = null;
     let currentAudio = null;
+
     tube.addEventListener("click", () => {
       tube.classList.add("shake");
       setTimeout(() => tube.classList.remove("shake"), 1000);
+
       if (currentSlip) {
         currentSlip.remove();
         currentSlip = null;
@@ -193,7 +188,8 @@
         currentAudio.pause();
         currentAudio.currentTime = 0;
       }
-      const index = weightedIndexes[Math.floor(Math.random() * weightedIndexes.length)];
+
+      const index = weightedRandom(probabilities);
       const slip = document.createElement("div");
       slip.className = "slip";
       slip.textContent = slips[index];
@@ -206,4 +202,3 @@
   </script>
 </body>
 </html>
-
